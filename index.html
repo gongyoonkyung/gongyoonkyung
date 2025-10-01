@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>자바스크립트 초급 퀴즈</title>
+</head>
+<body>
+  <h2>자바스크립트 초급 퀴즈</h2>
+  <p id="question"></p>
+  <input type="text" id="answer" placeholder="정답을 입력하세요">
+  <button onclick="checkAnswer()">제출</button>
+  <p id="result"></p>
+
+  <script>
+    // 문제 목록 (초급 수준)
+    const quizList = [
+      { question: "1. 자바스크립트에서 문자열을 표현할 때 사용하는 기호는? (예: Hello)", answer: "따옴표" },
+      { question: "2. 자바스크립트에서 한 줄 주석을 쓸 때 사용하는 기호는?", answer: "//" },
+      { question: "3. 자바스크립트에서 덧셈을 나타내는 연산자는?", answer: "+" },
+      { question: "4. 자바스크립트에서 배열을 만들 때 사용하는 기호는?", answer: "대괄호" },
+      { question: "5. 콘솔에 값을 출력할 때 사용하는 함수는?", answer: "console.log" }
+    ];
+
+    let current = 0;
+
+    // 첫 문제 출력
+    document.getElementById("question").innerText = quizList[current].question;
+
+    function checkAnswer() {
+      const userAnswer = document.getElementById("answer").value.trim();
+      const correct = quizList[current].answer;
+
+      if (userAnswer === correct) {
+        document.getElementById("result").innerText = "✅ 정답입니다!";
+      } else {
+        document.getElementById("result").innerText = `❌ 오답입니다. 정답은 [${correct}]`;
+      }
+
+      // 다음 문제로 이동
+      current++;
+      if (current < quizList.length) {
+        setTimeout(() => {
+          document.getElementById("question").innerText = quizList[current].question;
+          document.getElementById("answer").value = "";
+          document.getElementById("result").innerText = "";
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          document.getElementById("question").innerText = "퀴즈 종료 🎉 수고하셨습니다!";
+          document.getElementById("answer").style.display = "none";
+          document.querySelector("button").style.display = "none";
+          document.getElementById("result").innerText = "";
+        }, 1500);
+      }
+    }
+  </script>
+</body>
+</html>
